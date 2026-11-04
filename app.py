@@ -51,14 +51,14 @@ else:
     monitor_or_hub = monitor
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def index():
     """Serve the main dashboard"""
     with open("templates/index.html", "r") as f:
         return HTMLResponse(content=f.read())
 
 
-@app.get("/api/gpu-data")
+@app.api_route("/api/gpu-data", methods=["GET", "HEAD"])
 async def api_gpu_data():
     """REST API endpoint for GPU data"""
     if config.MODE == 'hub':
@@ -93,7 +93,7 @@ def compare_versions(current, latest):
         return False
 
 
-@app.get("/api/version")
+@app.api_route("/api/version", methods=["GET", "HEAD"])
 async def api_version():
     """Get current version and check for updates from GitHub"""
     current_version = __version__

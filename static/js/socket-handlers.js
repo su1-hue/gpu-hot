@@ -9,9 +9,17 @@ let reconnectAttempts = 0;
 const MAX_RECONNECT_ATTEMPTS = 10;
 const RECONNECT_DELAY = 2000; // Start with 2 seconds
 
+function getWsBasePath() {
+    // Preserve any mount prefix (e.g. /gpu-hot/ when embedded behind a proxy)
+    const path = window.location.pathname;
+    if (path.endsWith('/')) return path;
+    const idx = path.lastIndexOf('/');
+    return idx >= 0 ? path.slice(0, idx + 1) : '/';
+}
+
 function createWebSocketConnection() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(protocol + '//' + window.location.host + '/socket.io/');
+    const ws = new WebSocket(protocol + '//' + window.location.host + getWsBasePath() + 'socket.io/');
     return ws;
 }
 

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 async function checkVersion() {
     try {
-        const response = await fetch('/api/version');
+        const response = await fetch('api/version');
         const data = await response.json();
         
         const versionCurrent = document.getElementById('version-current');

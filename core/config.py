@@ -7,8 +7,8 @@ import socket
 
 # Server Configuration
 SECRET_KEY = 'gpu_hot_secret'
-HOST = '0.0.0.0'
-PORT = 1312
+HOST = os.getenv('GPU_HOT_HOST', '0.0.0.0')
+PORT = int(os.getenv('GPU_HOT_PORT', '1312'))
 DEBUG = False
 
 # Monitoring Configuration
